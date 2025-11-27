@@ -1,4 +1,4 @@
-package br.com.senai.jseries.sevice;
+package br.com.senai.jseries.service;
 
 import java.io.IOException;
 import java.net.URI;
