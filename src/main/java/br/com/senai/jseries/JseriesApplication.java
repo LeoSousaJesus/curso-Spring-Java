@@ -3,6 +3,7 @@ package br.com.senai.jseries;
 import br.com.senai.jseries.model.DadosEpisodio;
 import br.com.senai.jseries.model.DadosSerie;
 import br.com.senai.jseries.model.DadosTemporada;
+import br.com.senai.jseries.principal.Principal;
 import br.com.senai.jseries.service.ConsumoAPI;
 import br.com.senai.jseries.service.ConverteDados;
 import org.springframework.boot.CommandLineRunner;
@@ -26,14 +27,17 @@ public class JseriesApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        Principal principal = new Principal();
+        principal.exibeMenu();
+
         System.out.println("Olá Mundo Spring Console!");
         var consumoAPI = new ConsumoAPI();
         var json = consumoAPI.oberDados("https://www.omdbapi.com/?t=gilmore+girls&apikey=6585022c");
         // System.out.println(json);
         //json = consumoApi.obterDados("https://coffee.alexflipnote.dev/random.json");
-        System.out.println(json);
-        ConverteDados conversor = new ConverteDados();
-        DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
+        //System.out.println(json);
+        //ConverteDados conversor = new ConverteDados();
+        //DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
 
         // Próximo passo - Transfomrar esse JSON em objetos Java com Jackson.
 
@@ -55,10 +59,10 @@ public class JseriesApplication implements CommandLineRunner {
 
 
 
-        System.out.println(dados);
+        //System.out.println(dados);
         json = consumoAPI.oberDados("https://omdbapi.com/?t=gilmore+girls&season=1&episode=2&apikey=6585022c");
-        DadosEpisodio dadosEpisodio = conversor.obterDados(json, DadosEpisodio.class);
-        System.out.println(dadosEpisodio);
+        //DadosEpisodio dadosEpisodio = conversor.obterDados(json, DadosEpisodio.class);
+        //System.out.println(dadosEpisodio);
 
         List<DadosTemporada> temporadas = new ArrayList<>();
         System.out.println(temporadas);
