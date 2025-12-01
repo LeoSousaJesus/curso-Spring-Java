@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.Scanner;
 
 public class Principal {
-    private Scanner leitura = new Scanner(System.in);
+    private Scanner leitura =new Scanner(System.in);
     private ConsumoAPI consumo = new ConsumoAPI();
     private ConverteDados conversor = new ConverteDados();
     private final String ENDERECO = "https://www.omdbapi.com/?t=";
@@ -18,10 +18,8 @@ public class Principal {
     public void exibeMenu(){
         System.out.println("Digite o nome da série que deseja buscar");
         var nomeSerie = leitura.nextLine();
-        var json = consumo.oberDados(ENDERECO+nomeSerie.replace("","+")+API_KEY);
-
+        var json = consumo.obterDados(ENDERECO + nomeSerie.replace(" ","+") + API_KEY);
         DadosSerie dados = conversor.obterDados(json, DadosSerie.class);
-
         System.out.println(dados);
     }
 }
