@@ -3,12 +3,119 @@
 <head>
     <title>🎬 JSeries - Pesquisa</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; background-color: #f4f4f9; }
-        h1 { color: #333; }
-        form { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        input[type="text"] { padding: 10px; width: 300px; margin-right: 10px; border: 1px solid #ccc; border-radius: 4px; }
-        button { padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
-        .erro { color: red; margin-top: 15px; font-weight: bold; }
+        :root {
+            --neon-color: #00ffff; /* Ciano Elétrico */
+            --bg-color: #0a0a0a;
+            --text-color: #e0e0e0;
+            --secondary-color: #888;
+            --error-color: #ff0077; /* Neon Pink para Erros */
+            --shadow-light: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color);
+            --shadow-medium: 0 0 10px var(--neon-color), 0 0 20px var(--neon-color);
+            --shadow-error: 0 0 5px var(--error-color), 0 0 10px var(--error-color);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            color: var(--neon-color);
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: var(--shadow-light);
+        }
+
+        form {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+            border: 1px solid var(--neon-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        label {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            width: 100%;
+            margin-bottom: 20px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 6px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--neon-color);
+            outline: none;
+            box-shadow: var(--shadow-light);
+        }
+
+        /* Animação de Pulsação Neon */
+        @keyframes neon-pulse {
+            0% {
+                box-shadow: var(--shadow-light);
+            }
+            50% {
+                /* Sutilmente mais brilhante para o efeito de pulsação */
+                box-shadow: 0 0 8px var(--neon-color), 0 0 15px var(--neon-color);
+            }
+            100% {
+                box-shadow: var(--shadow-light);
+            }
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: var(--neon-color);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: var(--shadow-light);
+            animation: neon-pulse 2s infinite alternate; /* Aplica a animação */
+        }
+
+        button:hover {
+            background-color: #ffffff; /* Branco para contraste */
+            box-shadow: 0 0 15px var(--neon-color), 0 0 30px var(--neon-color);
+            animation: none; /* Pausa a pulsação ao passar o mouse */
+        }
+
+        .erro {
+            color: var(--error-color);
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            border: 1px solid var(--error-color);
+            border-radius: 6px;
+            box-shadow: var(--shadow-error);
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -20,7 +127,7 @@
 
 <form action="/detalhes" method="post">
     <label for="titulo">Título da Série:</label>
-    <input type="text" id="titulo" name="titulo" required/>
+    <input type="text" id="titulo" name="titulo" required placeholder="Ex: The Queen's Gambit"/>
     <button type="submit">Buscar Detalhes</button>
 </form>
 </body>
