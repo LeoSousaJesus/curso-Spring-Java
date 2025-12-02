@@ -3,30 +3,154 @@
 <head>
     <title th:text="${serie.titulo}"></title>
     <style>
-        body { font-family: sans-serif; padding: 20px; background-color: #f4f4f9; }
-        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        h1 { color: #007bff; border-bottom: 2px solid #ccc; padding-bottom: 5px; }
-        h3 { color: #333; margin-top: 20px; }
-        ul { list-style: none; padding-left: 0; }
-        li { background: #eee; margin-bottom: 5px; padding: 8px; border-radius: 4px; }
-        a { color: #007bff; text-decoration: none; }
+        :root {
+            --neon-color: #00ffff; /* Ciano Elétrico */
+            --bg-color: #0a0a0a;
+            --text-color: #e0e0e0;
+            --secondary-color: #888;
+            --shadow-light: 0 0 5px var(--neon-color), 0 0 10px var(--neon-color);
+            --shadow-medium: 0 0 10px var(--neon-color), 0 0 20px var(--neon-color);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            padding: 30px;
+            border: 1px solid var(--neon-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow-medium);
+            background-color: rgba(0, 0, 0, 0.5); /* Leve transparência para profundidade */
+        }
+
+        /* Link de Navegação */
+        .back-link {
+            display: inline-block;
+            color: var(--neon-color);
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: color 0.3s;
+            text-shadow: var(--shadow-light);
+        }
+        .back-link:hover {
+            color: white;
+            text-shadow: var(--shadow-medium);
+        }
+
+        /* Título Principal */
+        h1 {
+            color: var(--neon-color);
+            font-size: 2.5em;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+            text-shadow: var(--shadow-light);
+        }
+
+        /* Informações da Série */
+        .series-info p {
+            font-size: 1.1em;
+            margin: 5px 0;
+        }
+        .series-info strong {
+            color: var(--neon-color);
+            font-weight: bold;
+            text-shadow: var(--shadow-light);
+        }
+
+        /* Avaliação em Destaque */
+        .rating-box {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: var(--neon-color);
+            color: var(--bg-color);
+            border-radius: 4px;
+            font-weight: bold;
+            margin-left: 10px;
+            box-shadow: var(--shadow-light);
+        }
+
+        /* Título Secundário */
+        h2 {
+            color: var(--text-color);
+            font-size: 1.8em;
+            margin-top: 30px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--secondary-color);
+        }
+
+        /* Detalhes por Temporada */
+        .season-details {
+            margin-top: 25px;
+            padding: 15px;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        h3 {
+            color: var(--neon-color);
+            font-size: 1.4em;
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-shadow: var(--shadow-light);
+        }
+
+        /* Lista de Episódios */
+        .episode-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .episode-list li {
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 8px;
+            padding: 10px 15px;
+            border-radius: 6px;
+            border-left: 3px solid var(--neon-color);
+            transition: background-color 0.3s;
+        }
+
+        .episode-list li:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .episode-list strong {
+            color: var(--neon-color);
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
 <div class="container">
-    <a href="/">← Nova Pesquisa</a>
-    <hr/>
+    <a href="/" class="back-link">← Nova Pesquisa</a>
 
-    <h1 th:text="${serie.titulo}">Título</h1>
-    <p>Avaliação IMDb: <strong><span th:text="${serie.notasIMDB}"></span></strong></p>
-    <p>Total de Temporadas: <strong><span th:text="${serie.totalTemporadas}"></span></strong></p>
+    <h1 th:text="${serie.titulo}">Título da Série</h1>
+
+    <div class="series-info">
+        <p>Avaliação IMDb:
+            <span class="rating-box" th:text="${serie.notasIMDB}">9.0</span>
+        </p>
+        <p>Total de Temporadas: <strong><span th:text="${serie.totalTemporadas}">5</span></strong></p>
+    </div>
 
     <h2>Detalhes por Temporada</h2>
 
-    <div th:each="temporada : ${temporadas}">
+    <div th:each="temporada : ${temporadas}" class="season-details">
         <h3 th:text="'Temporada ' + ${temporada.numero}">Temporada X</h3>
 
-        <ul>
+        <ul class="episode-list">
             <li th:each="episodio : ${temporada.episodios}">
                 <span th:text="${episodio.titulo}">Nome do Episódio</span>
                 (Nota: <strong th:text="${episodio.avaliacao}"></strong>)
