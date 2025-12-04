@@ -79,13 +79,6 @@ Use o Maven Wrapper para compilar e iniciar a aplicação:
 
 A aplicação estará acessível em `http://localhost:8080`.
 
-#### Via IDE (IntelliJ IDEA / VS Code)
-
-1.  **Importar o Projeto:** Abra o projeto na sua IDE como um projeto Maven existente.
-2.  **Localizar a Classe Principal:** Encontre a classe principal da aplicação (aquela com a anotação `@SpringBootApplication`), geralmente localizada em `src/main/java/.../CursoSpringJavaApplication.java` (assumindo o nome do projeto).
-3.  **Executar:** Clique com o botão direito na classe principal e selecione "Run '...Application'".
-
-A aplicação será iniciada e estará acessível em `http://localhost:8080`.
 
 ## 📄 Estrutura do Projeto
 
